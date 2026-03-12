@@ -1,0 +1,21 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "astro",
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*.md",
+      "has": [{ "type": "host", "value": "sunjiali.github.io" }],
+      "destination": "/blog/:path",
+      "permanent": false
+    },
+    {
+      "source": "/blog/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug",
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+  ]
+}

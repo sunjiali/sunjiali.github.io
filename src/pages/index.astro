@@ -1,28 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
 ---
 
-<Layout title="Home">
-  <div class="text-center py-20">
-    <h1 class="text-5xl font-bold text-gray-900 mb-4">
-      欢迎来到我的网站
-    </h1>
-    <p class="text-xl text-gray-600 mb-8">
-      Hello, I'm 孙佳利
-    </p>
-    <div class="flex justify-center gap-4">
-      <a
-        href="/blog"
-        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-      >
-        阅读博客
-      </a>
-      <a
-        href="/about"
-        class="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors"
-      >
-        关于我
-      </a>
+<Layout title={SITE.title}>
+  <div class="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-5xl font-extrabold text-gray-900 mb-6">
+        {SITE.title}
+      </h1>
+      <p class="text-xl text-gray-600 mb-8">
+        你好！我是{SITE.title}，一名开发者。
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="/blog"
+          class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+        >
+          阅读博客
+        </a>
+        <a
+          href="/about"
+          class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+        >
+          关于我
+        </a>
+      </div>
     </div>
   </div>
 </Layout>
