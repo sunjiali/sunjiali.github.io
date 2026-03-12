@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="description" content="孙佳利的个人网站和博客"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title>欢迎来到我的新网站！ - 孙佳利</title></head> <body class="bg-gray-50 text-gray-900 antialiased"> <div class="min-h-screen flex flex-col"> <nav class="border-b border-gray-200 bg-white"> <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex h-16 justify-between"> <div class="flex"> <a href="/" class="flex items-center space-x-2 text-gray-900 hover:text-gray-600 transition-colors"> <span class="text-xl font-bold">孙佳利</span> </a> </div> <div class="hidden sm:flex sm:space-x-8"> <a href="/" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+首页
+</a> <a href="/about" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+关于
+</a> <a href="/blog" class="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+博客
+</a> </div> </div> </div> </nav> <main class="flex-1">  <article class="max-w-3xl mx-auto px-4 py-16 sm:px-6 lg:px-8"> <header class="mb-8 border-b border-gray-200 pb-8"> <h1 class="text-4xl font-bold text-gray-900 mb-4"> 欢迎来到我的新网站！ </h1> <div class="flex items-center justify-between text-sm text-gray-500"> <time datetime="2026-03-12T00:00:00.000Z"> 2026/3/12 </time> <div class="flex gap-2"> <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs"> 更新 </span><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs"> astro </span> </div> </div> <p class="text-gray-600 mt-4"> 从 Jekyll 迁移到 Astro 的第一篇文章 </p> </header> <div class="prose prose-lg max-w-none"> <p>你将在 <code>src/content/blog/</code> 目录中找到这篇文章。可以随意编辑并重新构建站点以查看更改。</p>
+<h2 id="命名格式">命名格式</h2>
+<p>博客文章文件需要按照以下格式命名：</p>
+<p><code>YEAR-MONTH-DAY-title.md</code></p>
+<p>其中 <code>YEAR</code> 是四位数字，<code>MONTH</code> 和 <code>DAY</code> 都是两位数字，而 <code>MARKUP</code> 是文件扩展名。之后，包含必要的 front matter。</p>
+<h2 id="代码高亮示例">代码高亮示例</h2>
+<p>Astro 也支持代码片段：</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="background-color:#ffffff;--shiki-dark-bg:#011627;color:#24292eff;--shiki-dark:#d6deeb; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#D32F2F;--shiki-dark:#C792EA">function</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> printHi</span><span style="color:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="color:#24292EFF;--shiki-dark:#D7DBE0">name</span><span style="color:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="color:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#7FDBCA;--shiki-dark-font-style:italic">  console</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">log</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="color:#22863A;--shiki-dark:#D6DEEB">`</span><span style="color:#22863A;--shiki-dark:#ECC48D">Hi, </span><span style="color:#D32F2F;--shiki-dark:#D3423E">${</span><span style="color:#24292EFF;--shiki-dark:#D7DBE0">name</span><span style="color:#D32F2F;--shiki-dark:#D3423E">}</span><span style="color:#22863A;--shiki-dark:#ECC48D">!</span><span style="color:#22863A;--shiki-dark:#D6DEEB">`</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">);</span></span>
+<span class="line"><span style="color:#24292EFF;--shiki-dark:#D6DEEB">}</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">printHi</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="color:#22863A;--shiki-dark:#D9F5DD">'</span><span style="color:#22863A;--shiki-dark:#ECC48D">Tom</span><span style="color:#22863A;--shiki-dark:#D9F5DD">'</span><span style="color:#24292EFF;--shiki-dark:#D6DEEB">);</span></span>
+<span class="line"><span style="color:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// => 打印 'Hi, Tom!' 到控制台</span></span></code></pre>
+<h2 id="下一步">下一步</h2>
+<ul>
+<li>在 <code>src/content/blog/</code> 中添加更多博客文章</li>
+<li>自定义 <code>src/layouts/Layout.astro</code> 中的布局</li>
+<li>在 <code>src/styles/global.css</code> 中调整样式</li>
+</ul>
+<p>祝您使用愉快！</p> </div> <footer class="mt-12 pt-8 border-t border-gray-200"> <a href="/blog" class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+← 返回博客列表
+</a> </footer> </article>  </main> <footer class="border-t border-gray-200 bg-white mt-auto"> <div class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8"> <p class="text-center text-sm text-gray-500">
+&copy; 2026 孙佳利. All rights reserved.
+</p> </div> </footer> </div> </body></html>
