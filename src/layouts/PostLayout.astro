@@ -14,24 +14,21 @@ const year = date.getFullYear();
 
 <Layout title={title}>
   <div class="post">
-    <header class="post-header">
+    <header class="post-header mb-5">
       <h1 class="post-title">{title}</h1>
       <p class="post-meta">
-        创建于 {date.toLocaleDateString('zh-CN', {
+        📅 {date.toLocaleDateString('zh-CN', {
+          year: 'numeric',
           month: 'long',
-          day: 'numeric',
-          year: 'numeric'
+          day: 'numeric'
         })}
       </p>
       {tags && tags.length > 0 && (
         <p class="post-tags">
-          <a href={`/blog/${year}/`}>
-            📅 {year}
-          </a>
-          {tags.map(tag => (
+          🏷️ {tags.map((tag, index) => (
             <>
-              <span>&nbsp; ·&nbsp;</span>
-              <a href={`/blog/tag/${tag}/`}>
+              {index > 0 && <span>, </span>}
+              <a href={`/blog/tag/${tag}/`} class="text-decoration-none">
                 #{tag}
               </a>
             </>
@@ -40,8 +37,63 @@ const year = date.getFullYear();
       )}
     </header>
 
-    <article class="post-content mt-4">
+    <article class="post-content">
       <slot />
     </article>
+
+    <footer class="post-footer mt-5 pt-4 border-top">
+      <a href="/blog" class="text-decoration-none">
+        ← 返回博客列表
+      </a>
+    </footer>
   </div>
 </Layout>
+
+<style>
+  .post-header {
+    text-align: center;
+  }
+
+  .post-title {
+    color: var(--global-theme-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .post-meta {
+    color: var(--global-text-color);
+    opacity: 0.7;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-tags {
+    font-size: 0.9rem;
+
+    a {
+      color: var(--global-theme-color);
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.8;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+
+  .post-footer a {
+    color: var(--global-text-color);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--global-theme-color);
+    }
+  }
+</style>

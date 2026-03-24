@@ -10,22 +10,25 @@ const sortedPosts = allPosts.sort((a, b) =>
 
 <BlogLayout title="博客 - Sun Jiali">
   <div class="post">
-    <div class="header-bar">
-      <h1>博客</h1>
+    <div class="header-bar mb-5">
+      <h1>博客文章</h1>
+      <p class="lead">分享我的技术思考和学习笔记</p>
     </div>
 
     {sortedPosts.length > 0 ? (
       <ul class="post-list">
         {sortedPosts.map(post => (
-          <li>
-            <h3>
-              <a class="post-title" href={`/blog/${post.slug}/`}>
+          <li class="post-item">
+            <h3 class="post-title">
+              <a href={`/blog/${post.slug}/`}>
                 {post.data.title}
               </a>
             </h3>
-            {post.data.description && <p>{post.data.description}</p>}
+            {post.data.description && (
+              <p class="post-description">{post.data.description}</p>
+            )}
             <p class="post-meta">
-              {post.data.date.toLocaleDateString('zh-CN', {
+              📅 {post.data.date.toLocaleDateString('zh-CN', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
@@ -33,13 +36,10 @@ const sortedPosts = allPosts.sort((a, b) =>
             </p>
             {post.data.tags && post.data.tags.length > 0 && (
               <p class="post-tags">
-                <a href={`/blog/${post.data.date.getFullYear()}/`}>
-                  📅 {post.data.date.getFullYear()}
-                </a>
-                {post.data.tags.map(tag => (
+                🏷️ {post.data.tags.map((tag, index) => (
                   <>
-                    <span>&nbsp;·&nbsp;</span>
-                    <a href={`/blog/tag/${tag}/`}>
+                    {index > 0 && <span>, </span>}
+                    <a href={`/blog/tag/${tag}/`} class="text-decoration-none">
                       #{tag}
                     </a>
                   </>
@@ -50,7 +50,58 @@ const sortedPosts = allPosts.sort((a, b) =>
         ))}
       </ul>
     ) : (
-      <p>暂无文章</p>
+      <div class="alert alert-info">
+        暂无文章，敬请期待...
+      </div>
     )}
   </div>
 </BlogLayout>
+
+<style>
+  .post-item {
+    padding: 2rem 0;
+  }
+
+  .post-title {
+    margin-bottom: 0.75rem;
+
+    a {
+      color: var(--global-text-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.5rem;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--global-theme-color);
+      }
+    }
+  }
+
+  .post-description {
+    color: var(--global-text-color);
+    opacity: 0.85;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-meta {
+    color: var(--global-text-color);
+    opacity: 0.7;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-tags {
+    font-size: 0.9rem;
+
+    a {
+      color: var(--global-theme-color);
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.8;
+        text-decoration: none;
+      }
+    }
+  }
+</style>

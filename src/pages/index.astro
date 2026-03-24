@@ -10,25 +10,18 @@ const sortedPosts = recentPosts
 ---
 
 <AboutLayout title="关于 - Sun Jiali">
-  <div class="profile float-right" style="margin-left: 2rem;">
-    <table>
-      <tr>
-        <td>
-          <div class="profile-img-container">
-            <img
-              class="img-fluid rounded"
-              src="/assets/img/prof_pic.jpg"
-              alt="Profile picture"
-              style="width: 200px; height: 200px; object-fit: cover;"
-            />
-          </div>
-        </td>
-      </tr>
-    </table>
+  <div class="profile float-end" style="width: 230px; margin-left: 2rem;">
+    <img
+      class="img-fluid rounded-circle"
+      src="/assets/img/prof_pic.jpg"
+      alt="Profile picture"
+      style="width: 100%; height: auto;"
+      onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23b509ac%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2280%22 fill=%22white%22%3E👤%3C/text%3E%3C/svg%3E'"
+    />
   </div>
 
-  <h1>关于我</h1>
-  <p>
+  <h1>孙佳利</h1>
+  <p class="lead">
     你好！我是孙佳利，是一名热爱技术的开发者。
   </p>
   <p>
@@ -39,73 +32,88 @@ const sortedPosts = recentPosts
     我的技术栈包括：Astro、TypeScript、Tailwind CSS 等。
   </p>
 
-  <h2>新闻</h2>
+  <h2 id="news">新闻动态</h2>
   <News limit={5} />
 
   {sortedPosts.length > 0 && (
     <>
-      <h2>最新文章</h2>
-      <div class="container">
-        <div class="row row-cols-1 row-cols-md-3">
-          {sortedPosts.map(post => (
-            <div class="col mb-4">
-              <a href={`/blog/${post.slug}/`} class="text-decoration-none">
-                <div class="card h-100 hoverable">
-                  <div class="card-body">
-                    <h3 class="card-title">{post.data.title}</h3>
-                    <p class="card-text">{post.data.description}</p>
-                    <p class="post-meta">
-                      {post.data.date.toLocaleDateString('zh-CN', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                      })}
-                    </p>
-                  </div>
+      <h2 id="latest-posts">最新文章</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {sortedPosts.map(post => (
+          <div class="col">
+            <a href={`/blog/${post.slug}/`} class="text-decoration-none">
+              <div class="card h-100 hoverable">
+                <div class="card-body">
+                  <h3 class="card-title h5">{post.data.title}</h3>
+                  <p class="card-text text-muted">{post.data.description}</p>
+                  <p class="card-text post-meta">
+                    <small>{post.data.date.toLocaleDateString('zh-CN', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}</small>
+                  </p>
                 </div>
-              </a>
-            </div>
-          ))}
-        </div>
+              </div>
+            </a>
+          </div>
+        ))}
       </div>
     </>
   )}
 
-  <h2>联系方式</h2>
+  <h2 id="contact">联系方式</h2>
   <p>
     欢迎通过邮件联系我：<a href="mailto:sunjiali@aliyun.com">sunjiali@aliyun.com</a>
   </p>
 </AboutLayout>
 
 <style>
-  .profile-img-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 50%;
+  .profile img {
+    border: 3px solid var(--global-divider-color);
+    transition: border-color 0.3s ease;
   }
 
-  .card.hoverable:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+  .profile img:hover {
+    border-color: var(--global-theme-color);
   }
 
-  .card {
+  .card.hoverable {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid var(--global-divider-color);
     background-color: var(--global-bg-color);
   }
 
+  .card.hoverable:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
   .card-title {
-    font-size: 1.25rem;
     color: var(--global-text-color);
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .card-text {
     color: var(--global-text-color);
-    opacity: 0.8;
-    font-size: 0.95rem;
+  }
+
+  h1 {
+    color: var(--global-theme-color);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--global-divider-color);
+    color: var(--global-text-color);
+  }
+
+  .post-meta {
+    color: var(--global-text-color);
+    opacity: 0.7;
   }
 </style>
