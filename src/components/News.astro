@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+const { limit = 5 } = Astro.props;
+
+const allNews = await getCollection('news');
+const sortedNews = allNews
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, limit);
+
+// Render news content
+const newsItems = await Promise.all(
+  sortedNews.map(async (item) => {
+    const { Content } = await item.render();
+    return {
+      date: item.data.date,
+      title: item.data.title,
+      content: Content,
+    };
+  })
+);
+---
+
+{newsItems.length > 0 && (
+  <div class="news">
+    <div class="table-responsive">
+      <table class="table table-sm table-borderless">
+        <tbody>
+          {newsItems.map((item) => (
+            <tr>
+              <th scope="row" style="width: 20%">
+                {item.date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </th>
+              <td>
+                {item.title && (
+                  <span class="fw-bold">{item.title}</span>
+                )}
+                {item.title && <>: </>}
+                <item.content />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}

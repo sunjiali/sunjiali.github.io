@@ -1,0 +1,22 @@
+{
+  "name": "sunjiali-github-io",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.8",
+    "@astrojs/rss": "^4.0.10",
+    "astro": "^4.16.12",
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "sass": "^1.83.4",
+    "prettier": "^3.4.2"
+  }
+}

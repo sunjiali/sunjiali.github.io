@@ -1,0 +1,31 @@
+---
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Scripts from '../components/Scripts.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <Head {title} {description} />
+  </head>
+
+  <body class="fixed-top-nav sticky-bottom-footer">
+    <Header />
+
+    <div class="container mt-5" role="main">
+      <slot />
+    </div>
+
+    <Footer />
+    <Scripts />
+  </body>
+</html>

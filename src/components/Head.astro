@@ -1,0 +1,44 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Sun Jiali',
+  description = 'Personal website and blog',
+  image = '/assets/img/prof_pic.jpg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Meta -->
+<meta name="description" content={description} />
+<meta name="og:title" content={title} />
+<meta name="og:description" content={description} />
+<meta name="og:image" content={new URL(image, Astro.site)} />
+<meta name="og:type" content="website" />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+
+<!-- Academicons -->
+<link rel="stylesheet" href="/assets/css/academicons.min.css" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+<!-- Main Styles -->
+<link rel="stylesheet" href="/src/styles/main.scss" />

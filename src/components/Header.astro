@@ -1,0 +1,53 @@
+---
+import { siteConfig } from '../utils/site-config';
+
+const currentPath = Astro.url.pathname;
+const currentPage = currentPath === '/' ? 'about' : currentPath.split('/')[1];
+---
+
+<header>
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      {currentPath !== '/' && (
+        <a class="navbar-brand title font-weight-lighter" href="/">
+          <span class="font-weight-bold">{siteConfig.firstName}</span> {siteConfig.lastName}
+        </a>
+      )}
+
+      <button
+        class="navbar-toggler collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          {siteConfig.navItems.map(item => (
+            <li class={`nav-item ${currentPage === item.url.slice(1) ? 'active' : ''}`}>
+              <a class="nav-link" href={item.url}>
+                {item.title}
+                {currentPage === item.url.slice(1) && <span class="sr-only">(current)</span>}
+              </a>
+            </li>
+          ))}
+
+          {siteConfig.theme.enableDarkMode && (
+            <li class="nav-item">
+              <button id="light-toggle" title="Change theme" aria-label="Toggle theme">
+                <span id="light-toggle-system">🌓</span>
+                <span id="light-toggle-dark">🌙</span>
+                <span id="light-toggle-light">☀️</span>
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,111 @@
+---
+import AboutLayout from '../layouts/About.astro';
+import News from '../components/News.astro';
+import { getCollection } from 'astro:content';
+
+const recentPosts = await getCollection('blog');
+const sortedPosts = recentPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<AboutLayout title="关于 - Sun Jiali">
+  <div class="profile float-right" style="margin-left: 2rem;">
+    <table>
+      <tr>
+        <td>
+          <div class="profile-img-container">
+            <img
+              class="img-fluid rounded"
+              src="/assets/img/prof_pic.jpg"
+              alt="Profile picture"
+              style="width: 200px; height: 200px; object-fit: cover;"
+            />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <h1>关于我</h1>
+  <p>
+    你好！我是孙佳利，是一名热爱技术的开发者。
+  </p>
+  <p>
+    欢迎来到我的个人网站。这个网站使用 <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> 构建，
+    参考了 <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> 主题的设计风格。
+  </p>
+  <p>
+    我的技术栈包括：Astro、TypeScript、Tailwind CSS 等。
+  </p>
+
+  <h2>新闻</h2>
+  <News limit={5} />
+
+  {sortedPosts.length > 0 && (
+    <>
+      <h2>最新文章</h2>
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-3">
+          {sortedPosts.map(post => (
+            <div class="col mb-4">
+              <a href={`/blog/${post.slug}/`} class="text-decoration-none">
+                <div class="card h-100 hoverable">
+                  <div class="card-body">
+                    <h3 class="card-title">{post.data.title}</h3>
+                    <p class="card-text">{post.data.description}</p>
+                    <p class="post-meta">
+                      {post.data.date.toLocaleDateString('zh-CN', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  )}
+
+  <h2>联系方式</h2>
+  <p>
+    欢迎通过邮件联系我：<a href="mailto:sunjiali@aliyun.com">sunjiali@aliyun.com</a>
+  </p>
+</AboutLayout>
+
+<style>
+  .profile-img-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .card.hoverable:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  .card {
+    border: 1px solid var(--global-divider-color);
+    background-color: var(--global-bg-color);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    color: var(--global-text-color);
+    font-weight: 500;
+  }
+
+  .card-text {
+    color: var(--global-text-color);
+    opacity: 0.8;
+    font-size: 0.95rem;
+  }
+</style>

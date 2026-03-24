@@ -1,0 +1,56 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) =>
+  b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BlogLayout title="博客 - Sun Jiali">
+  <div class="post">
+    <div class="header-bar">
+      <h1>博客</h1>
+    </div>
+
+    {sortedPosts.length > 0 ? (
+      <ul class="post-list">
+        {sortedPosts.map(post => (
+          <li>
+            <h3>
+              <a class="post-title" href={`/blog/${post.slug}/`}>
+                {post.data.title}
+              </a>
+            </h3>
+            {post.data.description && <p>{post.data.description}</p>}
+            <p class="post-meta">
+              {post.data.date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </p>
+            {post.data.tags && post.data.tags.length > 0 && (
+              <p class="post-tags">
+                <a href={`/blog/${post.data.date.getFullYear()}/`}>
+                  📅 {post.data.date.getFullYear()}
+                </a>
+                {post.data.tags.map(tag => (
+                  <>
+                    <span>&nbsp;·&nbsp;</span>
+                    <a href={`/blog/tag/${tag}/`}>
+                      #{tag}
+                    </a>
+                  </>
+                ))}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>暂无文章</p>
+    )}
+  </div>
+</BlogLayout>

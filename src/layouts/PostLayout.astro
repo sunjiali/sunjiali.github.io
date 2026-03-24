@@ -1,0 +1,47 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  description?: string;
+  tags?: string[];
+}
+
+const { title, date, description, tags } = Astro.props;
+const year = date.getFullYear();
+---
+
+<Layout title={title}>
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+      <p class="post-meta">
+        创建于 {date.toLocaleDateString('zh-CN', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        })}
+      </p>
+      {tags && tags.length > 0 && (
+        <p class="post-tags">
+          <a href={`/blog/${year}/`}>
+            📅 {year}
+          </a>
+          {tags.map(tag => (
+            <>
+              <span>&nbsp; ·&nbsp;</span>
+              <a href={`/blog/tag/${tag}/`}>
+                #{tag}
+              </a>
+            </>
+          ))}
+        </p>
+      )}
+    </header>
+
+    <article class="post-content mt-4">
+      <slot />
+    </article>
+  </div>
+</Layout>
