@@ -1,30 +1,192 @@
-/* Light Theme - Indigo Purple Accent */
+@use './variables' as *;
+
+// ========================================
+// CSS Variables - 全局主题系统
+// ========================================
+
+// 全局颜色
 :root {
-  --global-theme-color: #6366f1;
-  --global-bg-color: #ffffff;
-  --global-bg-secondary-color: #f8fafc;
-  --global-text-color: #334155;
-  --global-divider-color: #e2e8f0;
-  --global-code-bg-color: #f1f5f9;
-  --global-hover-color: #4f46e5;
+  // 主色调 - 科技蓝紫渐变
+  --primary-start: #{$primary-start};
+  --primary-end: #{$primary-end};
+  --accent-cyan: #{$accent-cyan};
+  --primary-gradient: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--accent-cyan) 0%, var(--primary-start) 100%);
+  
+  // 霓虹色
+  --neon-blue: #{$neon-blue};
+  --neon-purple: #{$neon-purple};
+  --neon-pink: #{$neon-pink};
 }
 
-/* Dark Theme */
+// ========================================
+// Light Theme
+// ========================================
+:root {
+  --global-bg-color: #{$light-bg};
+  --global-bg-secondary-color: #{$light-bg-secondary};
+  --global-bg-tertiary-color: #{$light-bg-tertiary};
+  --global-text-color: #{$light-text};
+  --global-text-secondary-color: #{$light-text-secondary};
+  --global-divider-color: #{$light-divider};
+  
+  // 主题色
+  --global-theme-color: #{$primary-start};
+  --global-theme-hover: #{$primary-dark};
+  --global-hover-color: #{$primary-dark};
+  
+  // 玻璃拟态
+  --glass-bg: #{$glass-bg-light};
+  --glass-border: #{$glass-border-light};
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  
+  // 代码高亮
+  --global-code-bg-color: #{$code-bg-color-light};
+  
+  // 阴影
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.15);
+}
+
+// ========================================
+// Dark Theme (暗夜黑 + 霓虹蓝)
+// ========================================
 [data-theme="dark"] {
-  --global-theme-color: #818cf8;
-  --global-bg-color: #0f172a;
-  --global-bg-secondary-color: #1e293b;
-  --global-text-color: #e2e8f0;
-  --global-divider-color: #334155;
-  --global-code-bg-color: #1e293b;
-  --global-hover-color: #a5b4fc;
+  --global-bg-color: #{$dark-bg};
+  --global-bg-secondary-color: #{$dark-bg-secondary};
+  --global-bg-tertiary-color: #{$dark-bg-tertiary};
+  --global-text-color: #{$dark-text};
+  --global-text-secondary-color: #{$dark-text-secondary};
+  --global-divider-color: #{$dark-divider};
+  
+  // 主题色 - 亮色版本
+  --global-theme-color: #{$primary-light};
+  --global-theme-hover: #{$primary-start};
+  --global-hover-color: #{$primary-light};
+  
+  // 玻璃拟态 - 深色版本
+  --glass-bg: #{$glass-bg-dark};
+  --glass-border: #{$glass-border-dark};
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  
+  // 代码高亮
+  --global-code-bg-color: #{$code-bg-color-dark};
+  
+  // 阴影 - 霓虹效果
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(0, 212, 255, 0.2);
 }
 
-/* CSS Variables for Components */
+// ========================================
+// Component Theme Variables
+// ========================================
 body {
-  --global-theme-color: var(--global-theme-color, #6366f1);
-  --global-bg-color: var(--global-bg-color, #ffffff);
-  --global-bg-secondary-color: var(--global-bg-secondary-color, #f8fafc);
-  --global-text-color: var(--global-text-color, #334155);
-  --global-divider-color: var(--global-divider-color, #e2e8f0);
+  --global-theme-color: var(--global-theme-color, #{$primary-start});
+  --global-bg-color: var(--global-bg-color, #{$light-bg});
+  --global-bg-secondary-color: var(--global-bg-secondary-color, #{$light-bg-secondary});
+  --global-bg-tertiary-color: var(--global-bg-tertiary-color, #{$light-bg-tertiary});
+  --global-text-color: var(--global-text-color, #{$light-text});
+  --global-text-secondary-color: var(--global-text-secondary-color, #{$light-text-secondary});
+  --global-divider-color: var(--global-divider-color, #{$light-divider});
+  --global-hover-color: var(--global-hover-color, #{$primary-dark});
+}
+
+// ========================================
+// Utility Classes
+// ========================================
+
+// 渐变文字
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// 霓虹文字
+.neon-text {
+  color: var(--neon-blue);
+  text-shadow: 
+    0 0 4px var(--neon-blue),
+    0 0 11px var(--neon-blue),
+    0 0 19px var(--neon-blue),
+    0 0 40px var(--neon-blue);
+  
+  [data-theme="dark"] & {
+    animation: neon-flicker 3s infinite;
+  }
+}
+
+// 渐变背景
+.gradient-bg {
+  background: var(--primary-gradient);
+}
+
+// 玻璃卡片
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: $radius-lg;
+  box-shadow: var(--shadow-md);
+}
+
+// 渐变边框
+.gradient-border {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 2px;
+    background: var(--primary-gradient);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+  }
+}
+
+// 按钮样式
+.btn-gradient {
+  background: var(--primary-gradient);
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: $radius-md;
+  font-weight: 500;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    
+    &::before {
+      left: 100%;
+    }
+  }
 }

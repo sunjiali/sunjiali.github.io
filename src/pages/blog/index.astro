@@ -6,29 +6,43 @@ const allPosts = await getCollection('blog');
 const sortedPosts = allPosts.sort((a, b) =>
   b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+// Get all tags
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
 ---
 
 <BlogLayout title="博客 - 孙佳利" description="技术分享、运营经验与投资心得">
+  <!-- 粒子背景 -->
+  <div class="blog-particles"></div>
+  
   <div class="blog-container">
-    <header class="blog-header">
-      <h1>📝 博客文章</h1>
+    <header class="blog-header reveal">
+      <h1>📝 <span class="gradient-text">博客文章</span></h1>
       <p class="lead">分享技术思考、运营经验和投资心得</p>
+      
+      <!-- 标签云 -->
+      {allTags.length > 0 && (
+        <div class="tag-cloud">
+          {allTags.map((tag) => (
+            <span class="tag-item" data-tag={tag}>#{tag}</span>
+          ))}
+        </div>
+      )}
     </header>
 
     {sortedPosts.length > 0 ? (
-      <div class="posts-container">
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
         {sortedPosts.map((post, index) => (
-          <article class="post-card" style={`animation-delay: ${index * 0.1}s`}>
-            <a href={`/blog/${post.slug}/`} class="post-link">
-              <div class="post-content">
+          <article class="timeline-item reveal" style={`--delay: ${index * 0.1}s`}>
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">
+              <span class="date-year">{post.data.date.getFullYear()}</span>
+              <span class="date-month">{post.data.date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}</span>
+            </div>
+            <a href={`/blog/${post.slug}/`} class="post-card glass-card hover-lift">
+              <div class="post-card-inner">
                 <div class="post-meta-top">
-                  <span class="post-date">
-                    📅 {post.data.date.toLocaleDateString('zh-CN', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </span>
                   {post.data.categories && post.data.categories.length > 0 && (
                     <span class="post-category">{post.data.categories[0]}</span>
                   )}
@@ -39,19 +53,19 @@ const sortedPosts = allPosts.sort((a, b) =>
                 )}
                 {post.data.tags && post.data.tags.length > 0 && (
                   <div class="post-tags">
-                    {post.data.tags.map(tag => (
+                    {post.data.tags.slice(0, 3).map(tag => (
                       <span class="tag">#{tag}</span>
                     ))}
                   </div>
                 )}
+                <span class="read-more gradient-text">阅读 →</span>
               </div>
-              <span class="read-more">阅读 →</span>
             </a>
           </article>
         ))}
       </div>
     ) : (
-      <div class="empty-state">
+      <div class="empty-state glass-card reveal">
         <span class="empty-icon">📝</span>
         <p>暂无文章，敬请期待...</p>
       </div>
@@ -60,91 +74,162 @@ const sortedPosts = allPosts.sort((a, b) =>
 </BlogLayout>
 
 <style>
+  /* ======================================== */
+  /* Blog Particles Background */
+  /* ======================================== */
+  .blog-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
   .blog-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+    position: relative;
   }
 
   .blog-header {
     text-align: center;
     margin-bottom: 3rem;
     padding-bottom: 2rem;
-    border-bottom: 2px solid var(--global-divider-color);
   }
 
   .blog-header h1 {
-    color: var(--global-theme-color);
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
   }
 
   .blog-header .lead {
-    color: var(--global-text-color);
-    opacity: 0.8;
+    color: var(--global-text-secondary-color);
     font-size: 1.1rem;
+    margin-bottom: 1.5rem;
   }
 
-  .posts-container {
+  /* ======================================== */
+  /* Tag Cloud */
+  /* ======================================== */
+  .tag-cloud {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 
-  .post-card {
-    animation: fadeInUp 0.5s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .post-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    background: var(--global-bg-secondary-color);
-    border: 1px solid var(--global-divider-color);
-    border-radius: 12px;
-    text-decoration: none;
+  .tag-item {
+    padding: 0.4rem 0.9rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    color: var(--global-text-secondary-color);
+    cursor: pointer;
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
   }
 
-  .post-link:hover {
-    transform: translateX(8px);
+  .tag-item:hover {
     border-color: var(--global-theme-color);
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+    color: var(--global-theme-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
   }
 
-  .post-content {
-    flex: 1;
+  /* ======================================== */
+  /* Timeline */
+  /* ======================================== */
+  .timeline-container {
+    position: relative;
+    padding-left: 140px;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 120px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary-start), var(--primary-end));
+    border-radius: 2px;
+    opacity: 0.3;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInLeft 0.6s ease-out forwards;
+    animation-delay: var(--delay);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -24px;
+    top: 1.5rem;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    border: 3px solid var(--global-bg-color);
+    box-shadow: 0 0 0 3px var(--primary-start);
+    z-index: 1;
+  }
+
+  .timeline-date {
+    position: absolute;
+    left: -140px;
+    top: 1.2rem;
+    text-align: right;
+    width: 100px;
+  }
+
+  .date-year {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--global-theme-color);
+  }
+
+  .date-month {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--global-text-secondary-color);
+  }
+
+  /* ======================================== */
+  /* Post Card */
+  /* ======================================== */
+  .post-card {
+    display: block;
+    text-decoration: none;
+    padding: 0;
+  }
+
+  .post-card-inner {
+    padding: 1.5rem;
   }
 
   .post-meta-top {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--global-text-color);
-    opacity: 0.7;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
   }
 
   .post-category {
-    background: var(--global-theme-color);
+    background: var(--primary-gradient);
     color: white;
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
     font-size: 0.75rem;
+    font-weight: 500;
   }
 
   .post-title {
@@ -152,49 +237,48 @@ const sortedPosts = allPosts.sort((a, b) =>
     color: var(--global-text-color);
     margin-bottom: 0.5rem;
     font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .post-card:hover .post-title {
+    color: var(--global-theme-color);
   }
 
   .post-description {
-    color: var(--global-text-color);
-    opacity: 0.8;
+    color: var(--global-text-secondary-color);
     font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .post-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   .tag {
-    background: var(--global-bg-color);
+    background: rgba(102, 126, 234, 0.1);
     color: var(--global-theme-color);
     padding: 0.2rem 0.6rem;
-    border-radius: 20px;
+    border-radius: 9999px;
     font-size: 0.8rem;
-    border: 1px solid var(--global-theme-color);
+    border: 1px solid rgba(102, 126, 234, 0.2);
   }
 
   .read-more {
-    color: var(--global-theme-color);
     font-weight: 600;
-    font-size: 1rem;
-    white-space: nowrap;
-    margin-left: 1rem;
-    transition: transform 0.3s ease;
+    font-size: 0.95rem;
+    display: inline-block;
   }
 
-  .post-link:hover .read-more {
-    transform: translateX(4px);
-  }
-
+  /* ======================================== */
+  /* Empty State */
+  /* ======================================== */
   .empty-state {
     text-align: center;
     padding: 4rem 0;
-    color: var(--global-text-color);
-    opacity: 0.6;
   }
 
   .empty-icon {
@@ -203,19 +287,133 @@ const sortedPosts = allPosts.sort((a, b) =>
     margin-bottom: 1rem;
   }
 
-  @media (max-width: 576px) {
-    .post-link {
-      flex-direction: column;
-      align-items: flex-start;
-    }
+  .empty-state p {
+    color: var(--global-text-secondary-color);
+    font-size: 1.1rem;
+  }
 
-    .read-more {
-      margin-left: 0;
-      margin-top: 1rem;
-    }
-
+  /* ======================================== */
+  /* Responsive */
+  /* ======================================== */
+  @media (max-width: 768px) {
     .blog-header h1 {
       font-size: 2rem;
     }
+
+    .timeline-container {
+      padding-left: 80px;
+    }
+
+    .timeline-line {
+      left: 60px;
+    }
+
+    .timeline-dot {
+      left: -18px;
+    }
+
+    .timeline-date {
+      left: -75px;
+      width: 60px;
+    }
+
+    .date-year {
+      font-size: 0.9rem;
+    }
+
+    .date-month {
+      font-size: 0.7rem;
+    }
+
+    .post-title {
+      font-size: 1.15rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .timeline-container {
+      padding-left: 0;
+    }
+
+    .timeline-line {
+      display: none;
+    }
+
+    .timeline-item {
+      padding-left: 0;
+    }
+
+    .timeline-dot {
+      display: none;
+    }
+
+    .timeline-date {
+      position: relative;
+      left: 0;
+      top: 0;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+
+    .date-year {
+      display: inline;
+    }
+
+    .date-month {
+      display: inline;
+      margin-left: 0.5rem;
+    }
   }
 </style>
+
+<script>
+  /* Reveal animation observer */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* Tag filter functionality */
+  document.querySelectorAll('.tag-item').forEach(tag => {
+    tag.addEventListener('click', () => {
+      const tagName = tag.getAttribute('data-tag');
+      const cards = document.querySelectorAll('.timeline-item');
+      
+      cards.forEach(card => {
+        const tags = card.querySelectorAll('.tag');
+        const hasTag = Array.from(tags).some(t => t.textContent.includes(tagName));
+        
+        if (hasTag || tagName === 'all') {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+
+  /* Add particles */
+  const particles = document.querySelector('.blog-particles');
+  if (particles) {
+    for (let i = 0; i < 10; i++) {
+      const orb = document.createElement('div');
+      orb.style.cssText = `
+        position: absolute;
+        width: ${Math.random() * 200 + 100}px;
+        height: ${Math.random() * 200 + 100}px;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        background: radial-gradient(circle, rgba(102, 126, 234, ${Math.random() * 0.08 + 0.02}) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float ${Math.random() * 10 + 10}s ease-in-out infinite;
+        pointer-events: none;
+      `;
+      particles.appendChild(orb);
+    }
+  }
+</script>

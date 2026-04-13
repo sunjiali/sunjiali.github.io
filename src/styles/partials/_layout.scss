@@ -1,15 +1,48 @@
 @use './variables' as *;
 @use './themes' as *;
+@use './animations' as *;
+
+// ========================================
+// Base Layout
+// ========================================
 
 body {
   padding-bottom: $footer-height;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
   font-family: $font-family-sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  
+  // 动态渐变背景（首页）
+  &.has-hero-bg {
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba($primary-start, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba($primary-end, 0.08) 0%, transparent 50%),
+      var(--global-bg-color);
+    
+    [data-theme="dark"] & {
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba($neon-blue, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba($neon-purple, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba($primary-start, 0.05) 0%, transparent 70%),
+        var(--global-bg-color);
+    }
+  }
 
   h1, h2, h3, h4, h5, h6 {
     scroll-margin-top: $navbar-height + 20px;
+    color: var(--global-text-color);
+  }
+  
+  a {
+    color: var(--global-theme-color);
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: var(--global-hover-color);
+    }
   }
 }
 
@@ -17,22 +50,91 @@ body.fixed-top-nav {
   padding-top: $navbar-height;
 }
 
+// ========================================
+// Container
+// ========================================
 .container {
   max-width: $max-content-width;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-.profile img {
-  width: 100%;
-  border-radius: 50%;
+// ========================================
+// Section Styling
+// ========================================
+section {
+  margin-bottom: 3rem;
+  position: relative;
 }
 
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--global-text-color);
+  
+  &::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+  }
+  
+  .icon {
+    font-size: 1.25rem;
+  }
+}
+
+// ========================================
+// Profile
+// ========================================
+.profile {
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+
+// ========================================
+// Post Content
+// ========================================
 .post-content {
   max-width: 800px;
   margin: 0 auto;
 }
 
 .post-meta {
-  color: var(--global-text-color);
-  opacity: 0.7;
-  font-size: 0.875rem;
+  color: var(--global-text-secondary-color);
+  font-size: 0.9rem;
+}
+
+// ========================================
+// Cards Grid
+// ========================================
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+// ========================================
+// Responsive
+// ========================================
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  section {
+    margin-bottom: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
 }

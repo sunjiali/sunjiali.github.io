@@ -11,40 +11,58 @@ const sortedPosts = recentPosts
 ---
 
 <AboutLayout title="关于 - 孙佳利" description={siteConfig.description}>
+  <!-- 粒子背景容器 -->
+  <div class="hero-particles" id="particles"></div>
+  
   <div class="profile-section">
     <div class="row align-items-center">
       <div class="col-md-3 text-center text-md-start mb-4 mb-md-0">
-        <img
-          class="profile-img"
-          src="/assets/img/prof_pic.jpg"
-          alt="孙佳利"
-          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%236366f1%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22%3E孙%3C/text%3E%3C/svg%3E'"
-        />
+        <div class="avatar-wrapper">
+          <div class="avatar-glow"></div>
+          <img
+            class="profile-img"
+            src="/assets/img/prof_pic.jpg"
+            alt="孙佳利"
+            onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 stop-color=%22%23667eea%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%23764ba2%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22200%22 height=%22200%22 rx=%22100%22 fill=%22url(%23g)%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22%3E孙%3C/text%3E%3C/svg%3E'"
+          />
+        </div>
       </div>
       <div class="col-md-9">
-        <h1 class="mb-3">孙佳利 <span class="subtitle">Sun Jiali</span></h1>
-        <p class="lead tagline">运维工程师 · AI工具探索者 · 内容创作者</p>
+        <h1 class="mb-2">
+          孙佳利 
+          <span class="subtitle gradient-text">Sun Jiali</span>
+        </h1>
+        <p class="tagline">
+          <span class="typing-text" id="typing"></span>
+        </p>
+        <div class="tech-tags">
+          <span class="tech-tag">⚙️ 运维工程</span>
+          <span class="tech-tag">🤖 AI工具</span>
+          <span class="tech-tag">📝 内容创作</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <section class="intro-section">
-    <h2>👋 你好</h2>
-    <p>
-      我是一名热爱技术的运维工程师，目前专注于
-      <strong>AI提效工具</strong>的开发和应用。在日常工作中，我热衷于用技术手段解决实际问题，
-      提升团队协作效率。
-    </p>
-    <p>
-      除了主业，我也积极探索副业方向——在小红书和公众号分享
-      <strong>AI工具提效</strong>的心得体会，希望能帮助更多人拥抱AI时代。
-    </p>
+  <section class="intro-section reveal">
+    <h2 class="section-title"><span class="icon">👋</span> 你好</h2>
+    <div class="glass-card p-4">
+      <p>
+        我是一名热爱技术的运维工程师，目前专注于
+        <strong class="gradient-text">AI提效工具</strong>的开发和应用。在日常工作中，我热衷于用技术手段解决实际问题，
+        提升团队协作效率。
+      </p>
+      <p>
+        除了主业，我也积极探索副业方向——在小红书和公众号分享
+        <strong class="gradient-text">AI工具提效</strong>的心得体会，希望能帮助更多人拥抱AI时代。
+      </p>
+    </div>
   </section>
 
-  <section class="skills-section">
-    <h2>🛠️ 技能栈</h2>
+  <section class="skills-section reveal">
+    <h2 class="section-title"><span class="icon">🛠️</span> 技能栈</h2>
     <div class="skills-grid">
-      <div class="skill-card">
+      <div class="skill-card glass-card hover-lift hover-border-flow">
         <div class="skill-icon">⚙️</div>
         <h3>运维工程</h3>
         <ul>
@@ -53,8 +71,11 @@ const sortedPosts = recentPosts
           <li>监控告警 (Prometheus/Grafana)</li>
           <li>CI/CD 流水线</li>
         </ul>
+        <div class="skill-progress">
+          <div class="progress-bar" style="--progress: 85%"></div>
+        </div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card glass-card hover-lift hover-border-flow">
         <div class="skill-icon">🤖</div>
         <h3>AI 工具</h3>
         <ul>
@@ -63,8 +84,11 @@ const sortedPosts = recentPosts
           <li>AI 办公自动化</li>
           <li>效率工具集成</li>
         </ul>
+        <div class="skill-progress">
+          <div class="progress-bar" style="--progress: 75%"></div>
+        </div>
       </div>
-      <div class="skill-card">
+      <div class="skill-card glass-card hover-lift hover-border-flow">
         <div class="skill-icon">📝</div>
         <h3>内容创作</h3>
         <ul>
@@ -73,18 +97,21 @@ const sortedPosts = recentPosts
           <li>技术文档撰写</li>
           <li>知识分享与传播</li>
         </ul>
+        <div class="skill-progress">
+          <div class="progress-bar" style="--progress: 70%"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="social-section">
-    <h2>🔗 社交媒体</h2>
+  <section class="social-section reveal">
+    <h2 class="section-title"><span class="icon">🔗</span> 社交媒体</h2>
     <div class="social-links">
-      <a href="https://github.com/sunjiali" target="_blank" rel="noopener noreferrer" class="social-link github">
+      <a href="https://github.com/sunjiali" target="_blank" rel="noopener noreferrer" class="social-link github btn-gradient">
         <span class="social-icon">🐙</span>
         <span>GitHub</span>
       </a>
-      <a href="mailto:sunjiali@aliyun.com" class="social-link email">
+      <a href="mailto:sunjiali@aliyun.com" class="social-link email btn-gradient">
         <span class="social-icon">📧</span>
         <span>sunjiali@aliyun.com</span>
       </a>
@@ -94,47 +121,85 @@ const sortedPosts = recentPosts
   <News limit={5} />
 
   {sortedPosts.length > 0 && (
-    <section class="posts-section">
-      <h2 id="latest-posts">📖 最新文章</h2>
+    <section class="posts-section reveal">
+      <h2 class="section-title" id="latest-posts"><span class="icon">📖</span> 最新文章</h2>
       <div class="posts-grid">
-        {sortedPosts.map(post => (
-          <a href={`/blog/${post.slug}/`} class="post-card">
-            <div class="post-card-inner">
-              <span class="post-date">{post.data.date.toLocaleDateString('zh-CN', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}</span>
+        {sortedPosts.map((post, index) => (
+          <a href={`/blog/${post.slug}/`} class="post-card reveal" style={`--delay: ${index * 0.1}s`}>
+            <div class="post-card-inner glass-card hover-lift">
+              <div class="post-meta">
+                <span class="post-date">{post.data.date.toLocaleDateString('zh-CN', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}</span>
+              </div>
               <h3 class="post-title">{post.data.title}</h3>
               <p class="post-desc">{post.data.description}</p>
-              <span class="read-more">阅读更多 →</span>
+              <span class="read-more gradient-text">阅读更多 →</span>
             </div>
           </a>
         ))}
       </div>
       <div class="text-center mt-4">
-        <a href="/blog" class="btn-view-all">查看全部文章</a>
+        <a href="/blog" class="btn-view-all btn-gradient">查看全部文章</a>
       </div>
     </section>
   )}
 
-  <section class="contact-section">
-    <h2 id="contact">📬 联系方式</h2>
-    <p>
-      欢迎交流与合作！可以通过以下方式联系我：
-    </p>
-    <ul class="contact-list">
-      <li>📧 邮箱：<a href="mailto:sunjiali@aliyun.com">sunjiali@aliyun.com</a></li>
-      <li>💬 微信：sun_jiali_sun</li>
-      <li>🐙 GitHub：<a href="https://github.com/sunjiali" target="_blank" rel="noopener noreferrer">sunjiali</a></li>
-    </ul>
+  <section class="contact-section reveal">
+    <h2 class="section-title" id="contact"><span class="icon">📬</span> 联系方式</h2>
+    <div class="glass-card p-4">
+      <p>欢迎交流与合作！可以通过以下方式联系我：</p>
+      <ul class="contact-list">
+        <li>📧 邮箱：<a href="mailto:sunjiali@aliyun.com">sunjiali@aliyun.com</a></li>
+        <li>💬 微信：sun_jiali_sun</li>
+        <li>🐙 GitHub：<a href="https://github.com/sunjiali" target="_blank" rel="noopener noreferrer">sunjiali</a></li>
+      </ul>
+    </div>
   </section>
 </AboutLayout>
 
 <style>
+  /* ======================================== */
+  /* Hero Section with Particles */
+  /* ======================================== */
+  .hero-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+  
+  /* ======================================== */
   /* Profile Section */
+  /* ======================================== */
   .profile-section {
     margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  /* Avatar with Glow Effect */
+  .avatar-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .avatar-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(20px);
+    animation: pulse-glow 3s ease-in-out infinite;
   }
   
   .profile-img {
@@ -142,47 +207,96 @@ const sortedPosts = recentPosts
     height: 180px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--global-theme-color);
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+    border: 4px solid var(--glass-bg);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 4s ease-in-out infinite;
   }
   
   .profile-img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5);
   }
   
   h1 {
-    color: var(--global-theme-color);
+    font-family: var(--font-family-display, 'Outfit', sans-serif);
     font-weight: 700;
     font-size: 2.5rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .subtitle {
     font-size: 1.2rem;
-    color: var(--global-text-color);
-    opacity: 0.7;
     font-weight: 400;
+    display: block;
+    margin-top: 0.25rem;
   }
   
   .tagline {
-    color: var(--global-text-color);
-    opacity: 0.85;
     font-size: 1.1rem;
+    color: var(--global-text-secondary-color);
+    min-height: 1.6em;
+  }
+  
+  .typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background: var(--global-theme-color);
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: text-bottom;
+  }
+  
+  .tech-tags {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  
+  .tech-tag {
+    padding: 0.4rem 0.8rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    color: var(--global-text-secondary-color);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  
+  .tech-tag:hover {
+    border-color: var(--global-theme-color);
+    color: var(--global-theme-color);
+    transform: translateY(-2px);
   }
 
+  /* ======================================== */
   /* Sections */
+  /* ======================================== */
   section {
     margin-bottom: 2.5rem;
   }
   
-  h2 {
-    margin-top: 2.5rem;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--global-theme-color);
-    color: var(--global-text-color);
-    font-weight: 600;
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+  }
+  
+  .glass-card:hover {
+    box-shadow: var(--shadow-glow);
+    border-color: rgba(102, 126, 234, 0.3);
   }
   
   p {
@@ -190,34 +304,32 @@ const sortedPosts = recentPosts
     color: var(--global-text-color);
   }
 
+  /* ======================================== */
   /* Skills Grid */
+  /* ======================================== */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-top: 1rem;
   }
   
   .skill-card {
-    background: var(--global-bg-secondary-color);
-    border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid var(--global-divider-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .skill-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+    transform: translateY(-8px);
   }
   
   .skill-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
   }
   
   .skill-card h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
     color: var(--global-theme-color);
   }
@@ -225,21 +337,49 @@ const sortedPosts = recentPosts
   .skill-card ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 1rem 0;
   }
   
   .skill-card li {
-    padding: 0.3rem 0;
-    color: var(--global-text-color);
+    padding: 0.35rem 0;
+    color: var(--global-text-secondary-color);
     font-size: 0.9rem;
+    position: relative;
+    padding-left: 1.25rem;
   }
   
   .skill-card li::before {
-    content: "• ";
+    content: '▹';
+    position: absolute;
+    left: 0;
     color: var(--global-theme-color);
   }
+  
+  /* Skill Progress Bar */
+  .skill-progress {
+    height: 4px;
+    background: var(--glass-border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: auto;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+    animation: progress-fill 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes progress-fill {
+    to { width: var(--progress); }
+  }
 
+  /* ======================================== */
   /* Social Links */
+  /* ======================================== */
   .social-links {
     display: flex;
     gap: 1rem;
@@ -250,30 +390,28 @@ const sortedPosts = recentPosts
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 8px;
-    background: var(--global-bg-secondary-color);
-    border: 1px solid var(--global-divider-color);
+    padding: 0.75rem 1.5rem;
     text-decoration: none;
-    color: var(--global-text-color);
+    color: white;
     transition: all 0.3s ease;
   }
   
   .social-link:hover {
-    background: var(--global-theme-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
     color: white;
-    border-color: var(--global-theme-color);
-    transform: translateY(-2px);
   }
   
   .social-icon {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
+  /* ======================================== */
   /* Posts Grid */
+  /* ======================================== */
   .posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-top: 1rem;
   }
@@ -281,71 +419,74 @@ const sortedPosts = recentPosts
   .post-card {
     text-decoration: none;
     display: block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+    animation-delay: var(--delay, 0s);
   }
   
   .post-card-inner {
-    background: var(--global-bg-secondary-color);
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid var(--global-divider-color);
     height: 100%;
-    transition: all 0.3s ease;
   }
   
-  .post-card:hover .post-card-inner {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
-    border-color: var(--global-theme-color);
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   
   .post-date {
     font-size: 0.85rem;
-    color: var(--global-text-color);
-    opacity: 0.6;
+    color: var(--global-text-secondary-color);
   }
   
   .post-title {
     font-size: 1.2rem;
     color: var(--global-text-color);
-    margin: 0.5rem 0;
+    margin: 0.75rem 0;
     font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .post-card:hover .post-title {
+    color: var(--global-theme-color);
   }
   
   .post-desc {
     font-size: 0.9rem;
-    color: var(--global-text-color);
-    opacity: 0.8;
+    color: var(--global-text-secondary-color);
     margin-bottom: 1rem;
+    line-height: 1.6;
   }
   
   .read-more {
     font-size: 0.9rem;
-    color: var(--global-theme-color);
     font-weight: 500;
   }
   
   .btn-view-all {
     display: inline-block;
-    padding: 0.75rem 2rem;
-    background: var(--global-theme-color);
-    color: white;
+    padding: 0.85rem 2.5rem;
     text-decoration: none;
-    border-radius: 8px;
+    color: white;
+    border-radius: 12px;
     font-weight: 500;
     transition: all 0.3s ease;
   }
   
   .btn-view-all:hover {
-    background: #5558e3;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
   }
 
+  /* ======================================== */
   /* Contact Section */
+  /* ======================================== */
   .contact-list {
     list-style: none;
     padding: 0;
+    margin-top: 1rem;
   }
   
   .contact-list li {
@@ -356,47 +497,43 @@ const sortedPosts = recentPosts
   .contact-list a {
     color: var(--global-theme-color);
     text-decoration: none;
+    font-weight: 500;
   }
   
   .contact-list a:hover {
     text-decoration: underline;
   }
 
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .profile-section,
-  .intro-section,
-  .skills-section,
-  .social-section,
-  .posts-section,
-  .contact-section {
-    animation: fadeInUp 0.6s ease-out forwards;
-  }
-  
-  .skills-section { animation-delay: 0.1s; }
-  .social-section { animation-delay: 0.2s; }
-  .posts-section { animation-delay: 0.3s; }
-  .contact-section { animation-delay: 0.4s; }
-
+  /* ======================================== */
   /* Mobile Responsive */
+  /* ======================================== */
   @media (max-width: 768px) {
     h1 {
       font-size: 2rem;
+      text-align: center;
+    }
+    
+    .subtitle {
+      display: block;
+      text-align: center;
+    }
+    
+    .profile-section .row {
+      flex-direction: column;
+      align-items: center;
     }
     
     .profile-img {
       width: 150px;
       height: 150px;
+    }
+    
+    .tagline {
+      text-align: center;
+    }
+    
+    .tech-tags {
+      justify-content: center;
     }
     
     .skills-grid {
@@ -410,5 +547,119 @@ const sortedPosts = recentPosts
     .social-links {
       flex-direction: column;
     }
+    
+    .social-link {
+      justify-content: center;
+    }
   }
 </style>
+
+<script>
+  /* ======================================== */
+  /* Intersection Observer for Reveal */
+  /* ======================================== */
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
+
+  /* ======================================== */
+  /* Navbar Scroll Effect */
+  /* ======================================== */
+  const navbar = document.querySelector('.navbar');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  }
+
+  /* ======================================== */
+  /* Typing Effect */
+  /* ======================================== */
+  const phrases = [
+    '运维工程师 · AI工具探索者 · 内容创作者',
+    '热爱技术，享受折腾',
+    '用代码改变世界',
+    'DevOps & Cloud Native'
+  ];
+  
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 100;
+  
+  const typingElement = document.getElementById('typing');
+  
+  function typeEffect() {
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+      typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 50;
+    } else {
+      typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 100;
+    }
+    
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      isDeleting = true;
+      typingSpeed = 2000;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typingSpeed = 500;
+    }
+    
+    setTimeout(typeEffect, typingSpeed);
+  }
+  
+  if (typingElement) {
+    typeEffect();
+  }
+
+  /* ======================================== */
+  /* Particles Background */
+  /* ======================================== */
+  const particlesContainer = document.getElementById('particles');
+  if (particlesContainer) {
+    for (let i = 0; i < 15; i++) {
+      const orb = document.createElement('div');
+      orb.className = 'particle-orb';
+      orb.style.cssText = `
+        position: absolute;
+        width: ${Math.random() * 300 + 100}px;
+        height: ${Math.random() * 300 + 100}px;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        background: radial-gradient(circle, rgba(102, 126, 234, ${Math.random() * 0.1 + 0.05}) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float ${Math.random() * 10 + 10}s ease-in-out infinite;
+        animation-delay: ${Math.random() * 5}s;
+        pointer-events: none;
+      `;
+      particlesContainer.appendChild(orb);
+    }
+  }
+
+  /* Add body class for hero background */
+  document.body.classList.add('has-hero-bg');
+</script>
