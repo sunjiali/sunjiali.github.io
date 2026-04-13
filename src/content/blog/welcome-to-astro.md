@@ -3,7 +3,7 @@ title: "欢迎来到我的新网站！"
 description: "从 Jekyll 迁移到 Astro 的第一篇文章"
 date: 2026-03-12
 tags: ["更新", "astro"]
-categories: ["tech"]
+categories: []
 ---
 
 你将在 `src/content/blog/` 目录中找到这篇文章。可以随意编辑并重新构建站点以查看更改。

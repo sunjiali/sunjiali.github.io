@@ -2,6 +2,7 @@
 import AboutLayout from '../layouts/About.astro';
 import News from '../components/News.astro';
 import { getCollection } from 'astro:content';
+import { siteConfig } from '../utils/site-config';
 
 const recentPosts = await getCollection('blog');
 const sortedPosts = recentPosts
@@ -9,111 +10,405 @@ const sortedPosts = recentPosts
   .slice(0, 3);
 ---
 
-<AboutLayout title="关于 - Sun Jiali">
-  <div class="profile float-end" style="width: 230px; margin-left: 2rem;">
-    <img
-      class="img-fluid rounded-circle"
-      src="/assets/img/prof_pic.jpg"
-      alt="Profile picture"
-      style="width: 100%; height: auto;"
-      onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23b509ac%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2280%22 fill=%22white%22%3E👤%3C/text%3E%3C/svg%3E'"
-    />
+<AboutLayout title="关于 - 孙佳利" description={siteConfig.description}>
+  <div class="profile-section">
+    <div class="row align-items-center">
+      <div class="col-md-3 text-center text-md-start mb-4 mb-md-0">
+        <img
+          class="profile-img"
+          src="/assets/img/prof_pic.jpg"
+          alt="孙佳利"
+          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%236366f1%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22white%22%3E孙%3C/text%3E%3C/svg%3E'"
+        />
+      </div>
+      <div class="col-md-9">
+        <h1 class="mb-3">孙佳利 <span class="subtitle">Sun Jiali</span></h1>
+        <p class="lead tagline">运维工程师 · AI工具探索者 · 内容创作者</p>
+      </div>
+    </div>
   </div>
 
-  <h1>孙佳利</h1>
-  <p class="lead">
-    你好！我是孙佳利，是一名热爱技术的开发者。
-  </p>
-  <p>
-    欢迎来到我的个人网站。这个网站使用 <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> 构建，
-    参考了 <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> 主题的设计风格。
-  </p>
-  <p>
-    我的技术栈包括：Astro、TypeScript、Tailwind CSS 等。
-  </p>
+  <section class="intro-section">
+    <h2>👋 你好</h2>
+    <p>
+      我是一名热爱技术的运维工程师，目前专注于
+      <strong>AI提效工具</strong>的开发和应用。在日常工作中，我热衷于用技术手段解决实际问题，
+      提升团队协作效率。
+    </p>
+    <p>
+      除了主业，我也积极探索副业方向——在小红书和公众号分享
+      <strong>AI工具提效</strong>的心得体会，希望能帮助更多人拥抱AI时代。
+    </p>
+  </section>
 
-  <h2 id="news">新闻动态</h2>
+  <section class="skills-section">
+    <h2>🛠️ 技能栈</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <h3>运维工程</h3>
+        <ul>
+          <li>自动化运维 (Ansible/Terraform)</li>
+          <li>容器化部署 (Docker/K8s)</li>
+          <li>监控告警 (Prometheus/Grafana)</li>
+          <li>CI/CD 流水线</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3>AI 工具</h3>
+        <ul>
+          <li>大语言模型应用开发</li>
+          <li>Prompt 工程优化</li>
+          <li>AI 办公自动化</li>
+          <li>效率工具集成</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📝</div>
+        <h3>内容创作</h3>
+        <ul>
+          <li>小红书运营 (AI工具方向)</li>
+          <li>公众号写作 (2000+粉丝)</li>
+          <li>技术文档撰写</li>
+          <li>知识分享与传播</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="social-section">
+    <h2>🔗 社交媒体</h2>
+    <div class="social-links">
+      <a href="https://github.com/sunjiali" target="_blank" rel="noopener noreferrer" class="social-link github">
+        <span class="social-icon">🐙</span>
+        <span>GitHub</span>
+      </a>
+      <a href="mailto:sunjiali@aliyun.com" class="social-link email">
+        <span class="social-icon">📧</span>
+        <span>sunjiali@aliyun.com</span>
+      </a>
+    </div>
+  </section>
+
   <News limit={5} />
 
   {sortedPosts.length > 0 && (
-    <>
-      <h2 id="latest-posts">最新文章</h2>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+    <section class="posts-section">
+      <h2 id="latest-posts">📖 最新文章</h2>
+      <div class="posts-grid">
         {sortedPosts.map(post => (
-          <div class="col">
-            <a href={`/blog/${post.slug}/`} class="text-decoration-none">
-              <div class="card h-100 hoverable">
-                <div class="card-body">
-                  <h3 class="card-title h5">{post.data.title}</h3>
-                  <p class="card-text text-muted">{post.data.description}</p>
-                  <p class="card-text post-meta">
-                    <small>{post.data.date.toLocaleDateString('zh-CN', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}</small>
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
+          <a href={`/blog/${post.slug}/`} class="post-card">
+            <div class="post-card-inner">
+              <span class="post-date">{post.data.date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}</span>
+              <h3 class="post-title">{post.data.title}</h3>
+              <p class="post-desc">{post.data.description}</p>
+              <span class="read-more">阅读更多 →</span>
+            </div>
+          </a>
         ))}
       </div>
-    </>
+      <div class="text-center mt-4">
+        <a href="/blog" class="btn-view-all">查看全部文章</a>
+      </div>
+    </section>
   )}
 
-  <h2 id="contact">联系方式</h2>
-  <p>
-    欢迎通过邮件联系我：<a href="mailto:sunjiali@aliyun.com">sunjiali@aliyun.com</a>
-  </p>
+  <section class="contact-section">
+    <h2 id="contact">📬 联系方式</h2>
+    <p>
+      欢迎交流与合作！可以通过以下方式联系我：
+    </p>
+    <ul class="contact-list">
+      <li>📧 邮箱：<a href="mailto:sunjiali@aliyun.com">sunjiali@aliyun.com</a></li>
+      <li>💬 微信：sun_jiali_sun</li>
+      <li>🐙 GitHub：<a href="https://github.com/sunjiali" target="_blank" rel="noopener noreferrer">sunjiali</a></li>
+    </ul>
+  </section>
 </AboutLayout>
 
 <style>
-  .profile img {
-    border: 3px solid var(--global-divider-color);
-    transition: border-color 0.3s ease;
+  /* Profile Section */
+  .profile-section {
+    margin-bottom: 2rem;
   }
-
-  .profile img:hover {
-    border-color: var(--global-theme-color);
-  }
-
-  .card.hoverable {
+  
+  .profile-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--global-theme-color);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--global-divider-color);
-    background-color: var(--global-bg-color);
   }
-
-  .card.hoverable:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  .profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
   }
-
-  .card-title {
-    color: var(--global-text-color);
-    font-weight: 600;
-  }
-
-  .card-text {
-    color: var(--global-text-color);
-  }
-
+  
   h1 {
     color: var(--global-theme-color);
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
   }
-
-  h2 {
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--global-divider-color);
-    color: var(--global-text-color);
-  }
-
-  .post-meta {
+  
+  .subtitle {
+    font-size: 1.2rem;
     color: var(--global-text-color);
     opacity: 0.7;
+    font-weight: 400;
+  }
+  
+  .tagline {
+    color: var(--global-text-color);
+    opacity: 0.85;
+    font-size: 1.1rem;
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 2.5rem;
+  }
+  
+  h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--global-theme-color);
+    color: var(--global-text-color);
+    font-weight: 600;
+  }
+  
+  p {
+    line-height: 1.8;
+    color: var(--global-text-color);
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .skill-card {
+    background: var(--global-bg-secondary-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--global-divider-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+  }
+  
+  .skill-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .skill-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--global-theme-color);
+  }
+  
+  .skill-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .skill-card li {
+    padding: 0.3rem 0;
+    color: var(--global-text-color);
+    font-size: 0.9rem;
+  }
+  
+  .skill-card li::before {
+    content: "• ";
+    color: var(--global-theme-color);
+  }
+
+  /* Social Links */
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    background: var(--global-bg-secondary-color);
+    border: 1px solid var(--global-divider-color);
+    text-decoration: none;
+    color: var(--global-text-color);
+    transition: all 0.3s ease;
+  }
+  
+  .social-link:hover {
+    background: var(--global-theme-color);
+    color: white;
+    border-color: var(--global-theme-color);
+    transform: translateY(-2px);
+  }
+  
+  .social-icon {
+    font-size: 1.2rem;
+  }
+
+  /* Posts Grid */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .post-card {
+    text-decoration: none;
+    display: block;
+  }
+  
+  .post-card-inner {
+    background: var(--global-bg-secondary-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--global-divider-color);
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  .post-card:hover .post-card-inner {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+    border-color: var(--global-theme-color);
+  }
+  
+  .post-date {
+    font-size: 0.85rem;
+    color: var(--global-text-color);
+    opacity: 0.6;
+  }
+  
+  .post-title {
+    font-size: 1.2rem;
+    color: var(--global-text-color);
+    margin: 0.5rem 0;
+    font-weight: 600;
+  }
+  
+  .post-desc {
+    font-size: 0.9rem;
+    color: var(--global-text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+  
+  .read-more {
+    font-size: 0.9rem;
+    color: var(--global-theme-color);
+    font-weight: 500;
+  }
+  
+  .btn-view-all {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--global-theme-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-view-all:hover {
+    background: #5558e3;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  }
+
+  /* Contact Section */
+  .contact-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contact-list li {
+    padding: 0.5rem 0;
+    color: var(--global-text-color);
+  }
+  
+  .contact-list a {
+    color: var(--global-theme-color);
+    text-decoration: none;
+  }
+  
+  .contact-list a:hover {
+    text-decoration: underline;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .profile-section,
+  .intro-section,
+  .skills-section,
+  .social-section,
+  .posts-section,
+  .contact-section {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .skills-section { animation-delay: 0.1s; }
+  .social-section { animation-delay: 0.2s; }
+  .posts-section { animation-delay: 0.3s; }
+  .contact-section { animation-delay: 0.4s; }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .profile-img {
+      width: 150px;
+      height: 150px;
+    }
+    
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .social-links {
+      flex-direction: column;
+    }
   }
 </style>

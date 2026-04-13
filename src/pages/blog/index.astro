@@ -8,100 +8,214 @@ const sortedPosts = allPosts.sort((a, b) =>
 );
 ---
 
-<BlogLayout title="博客 - Sun Jiali">
-  <div class="post">
-    <div class="header-bar mb-5">
-      <h1>博客文章</h1>
-      <p class="lead">分享我的技术思考和学习笔记</p>
-    </div>
+<BlogLayout title="博客 - 孙佳利" description="技术分享、运营经验与投资心得">
+  <div class="blog-container">
+    <header class="blog-header">
+      <h1>📝 博客文章</h1>
+      <p class="lead">分享技术思考、运营经验和投资心得</p>
+    </header>
 
     {sortedPosts.length > 0 ? (
-      <ul class="post-list">
-        {sortedPosts.map(post => (
-          <li class="post-item">
-            <h3 class="post-title">
-              <a href={`/blog/${post.slug}/`}>
-                {post.data.title}
-              </a>
-            </h3>
-            {post.data.description && (
-              <p class="post-description">{post.data.description}</p>
-            )}
-            <p class="post-meta">
-              📅 {post.data.date.toLocaleDateString('zh-CN', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </p>
-            {post.data.tags && post.data.tags.length > 0 && (
-              <p class="post-tags">
-                🏷️ {post.data.tags.map((tag, index) => (
-                  <>
-                    {index > 0 && <span>, </span>}
-                    <a href={`/blog/tag/${tag}/`} class="text-decoration-none">
-                      #{tag}
-                    </a>
-                  </>
-                ))}
-              </p>
-            )}
-          </li>
+      <div class="posts-container">
+        {sortedPosts.map((post, index) => (
+          <article class="post-card" style={`animation-delay: ${index * 0.1}s`}>
+            <a href={`/blog/${post.slug}/`} class="post-link">
+              <div class="post-content">
+                <div class="post-meta-top">
+                  <span class="post-date">
+                    📅 {post.data.date.toLocaleDateString('zh-CN', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                  {post.data.categories && post.data.categories.length > 0 && (
+                    <span class="post-category">{post.data.categories[0]}</span>
+                  )}
+                </div>
+                <h2 class="post-title">{post.data.title}</h2>
+                {post.data.description && (
+                  <p class="post-description">{post.data.description}</p>
+                )}
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="post-tags">
+                    {post.data.tags.map(tag => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <span class="read-more">阅读 →</span>
+            </a>
+          </article>
         ))}
-      </ul>
+      </div>
     ) : (
-      <div class="alert alert-info">
-        暂无文章，敬请期待...
+      <div class="empty-state">
+        <span class="empty-icon">📝</span>
+        <p>暂无文章，敬请期待...</p>
       </div>
     )}
   </div>
 </BlogLayout>
 
 <style>
-  .post-item {
-    padding: 2rem 0;
+  .blog-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .blog-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--global-divider-color);
+  }
+
+  .blog-header h1 {
+    color: var(--global-theme-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-header .lead {
+    color: var(--global-text-color);
+    opacity: 0.8;
+    font-size: 1.1rem;
+  }
+
+  .posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .post-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--global-bg-secondary-color);
+    border: 1px solid var(--global-divider-color);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .post-link:hover {
+    transform: translateX(8px);
+    border-color: var(--global-theme-color);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+  }
+
+  .post-content {
+    flex: 1;
+  }
+
+  .post-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--global-text-color);
+    opacity: 0.7;
+  }
+
+  .post-category {
+    background: var(--global-theme-color);
+    color: white;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
   }
 
   .post-title {
-    margin-bottom: 0.75rem;
-
-    a {
-      color: var(--global-text-color);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.5rem;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: var(--global-theme-color);
-      }
-    }
+    font-size: 1.3rem;
+    color: var(--global-text-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
   }
 
   .post-description {
     color: var(--global-text-color);
-    opacity: 0.85;
-    margin-bottom: 0.5rem;
-  }
-
-  .post-meta {
-    color: var(--global-text-color);
-    opacity: 0.7;
+    opacity: 0.8;
     font-size: 0.95rem;
-    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
   }
 
   .post-tags {
-    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 
-    a {
-      color: var(--global-theme-color);
-      transition: opacity 0.2s ease;
+  .tag {
+    background: var(--global-bg-color);
+    color: var(--global-theme-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid var(--global-theme-color);
+  }
 
-      &:hover {
-        opacity: 0.8;
-        text-decoration: none;
-      }
+  .read-more {
+    color: var(--global-theme-color);
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .post-link:hover .read-more {
+    transform: translateX(4px);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--global-text-color);
+    opacity: 0.6;
+  }
+
+  .empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 576px) {
+    .post-link {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .read-more {
+      margin-left: 0;
+      margin-top: 1rem;
+    }
+
+    .blog-header h1 {
+      font-size: 2rem;
     }
   }
 </style>

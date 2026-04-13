@@ -6,9 +6,10 @@ interface Props {
 }
 
 const {
-  title = 'Sun Jiali',
-  description = 'Personal website and blog',
-  image = '/assets/img/prof_pic.jpg'
+  title = '孙佳利 | 运维工程师 & 内容创作者',
+  description = '孙佳利（Sun Jiali）的个人网站。运维工程师，专注于AI提效工具开发、小红书运营与投资理财分享。',
+  image = '/assets/img/prof_pic.jpg',
+  keywords = '运维工程师, AI工具, 小红书运营, 公众号, 投资理财, 技术博客, 自动化运维'
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,12 +22,32 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-<!-- Meta -->
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
 <meta name="description" content={description} />
-<meta name="og:title" content={title} />
-<meta name="og:description" content={description} />
-<meta name="og:image" content={new URL(image, Astro.site)} />
-<meta name="og:type" content="website" />
+<meta name="keywords" content={keywords} />
+<meta name="author" content="孙佳利" />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="Chinese" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.site)} />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:site_name" content="孙佳利的个人网站" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+<!-- Canonical -->
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Bootstrap CSS -->
@@ -38,7 +59,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
 <!-- Main Styles -->
 <link rel="stylesheet" href="/assets/css/main.css" />
+
+<!-- Theme Detection Script -->
+<script is:inline>
+  const theme = (() => {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      return 'dark';
+    }
+    return 'light';
+  })();
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+</script>
