@@ -1,20 +1,5 @@
-# Dependencies
-node_modules/
-
-# Build output
-dist/
-
-# Astro
-.astro/
-
-# OS
+node_modules
+.vitepress/dist
+.vitepress/cache
+*.local
 .DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Environment
-.env
-.env.*
