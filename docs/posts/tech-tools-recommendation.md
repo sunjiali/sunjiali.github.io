@@ -193,8 +193,8 @@ AI助手：ChatGPT + Claude
 
 ## 🔗 相关资源
 
-- [我的AI提效实践](/posts/devops-ai-efficiency/)
-- [小红书运营经验](/posts/xiaohongshu-side-hustle/)
+- [我的AI提效实践](/posts/devops-ai-efficiency"
+- [小红书运营经验](/posts/xiaohongshu-side-hustle"
 
 ---
 

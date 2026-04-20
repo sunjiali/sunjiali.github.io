@@ -147,4 +147,4 @@ description: 记录我的A股投资实践，包括选股思路、仓位管理、
 *⚠️ 本文仅为个人记录，不构成投资建议。股市有风险，投资需谨慎。*
 
 *相关阅读*：
-- [技术工具推荐清单](/posts/tech-tools-recommendation/)
+- [技术工具推荐清单](/posts/tech-tools-recommendation)
