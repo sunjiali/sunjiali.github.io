@@ -27,7 +27,7 @@ jobs:
         run: npm ci
       
       - name: Build with VitePress
-        run: npm run docs:build
+        run: npm run build
       
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
