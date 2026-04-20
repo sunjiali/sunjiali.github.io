@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "SunJiLi"
+  name: "Sun Jiali"
   text: "运维工程师 | AI工具探索者 | 内容创作者"
   tagline: 记录技术成长，分享AI提效经验，探索内容创作之路
   actions:

@@ -1,7 +1,7 @@
 {
   "name": "sunjiali-github-io",
   "version": "2.0.0",
-  "description": "SunJiLi's Blog - 运维工程师的AI提效之路",
+  "description": "Sun Jiali's Blog - 运维工程师的AI提效之路",
   "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",
