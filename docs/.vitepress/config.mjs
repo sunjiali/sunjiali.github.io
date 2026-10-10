@@ -1,13 +1,13 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Sun Jiali',
+  title: 'Robin',
   description: '运维工程师 | AI工具探索者 | 内容创作者',
   lang: 'zh-CN',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
-    ['meta', { name: 'author', content: 'Sun Jiali' }],
+    ['meta', { name: 'author', content: 'Robin' }],
   ],
 
   themeConfig: {
@@ -34,7 +34,7 @@ export default defineConfig({
 
     footer: {
       message: '基于 VitePress 构建',
-      copyright: 'Copyright © 2024 Sun Jiali'
+      copyright: 'Copyright © 2024 Robin'
     },
 
     search: {
