@@ -4,6 +4,9 @@ title: 关于我
 
 # 关于我
 
+<img src="/robin-avatar.jpg" alt="Robin" width="150" style="border-radius:50%" />
+
+
 ## 👋 你好
 
 我叫 Robin，是一名普通的运维工程师。
