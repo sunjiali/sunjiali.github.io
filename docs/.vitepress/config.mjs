@@ -4,7 +4,7 @@ export default defineConfig({
   title: 'Sun Jiali',
   description: '运维工程师 | AI工具探索者 | 内容创作者',
   lang: 'zh-CN',
-  
+
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['meta', { name: 'author', content: 'Sun Jiali' }],
@@ -12,7 +12,7 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/favicon.svg',
-    
+
     nav: [
       { text: '首页', link: '/' },
       { text: '文章', link: '/posts/' },
@@ -22,7 +22,9 @@ export default defineConfig({
     sidebar: [
       {
         text: '博客文章',
-        items: []
+        items: [
+          { text: '开篇：一个运维工程师的 AI 笔记', link: '/posts/ai-ip-opening' },
+        ]
       }
     ],
 
