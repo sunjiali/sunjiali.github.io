@@ -3,8 +3,11 @@ layout: home
 
 hero:
   name: "Robin"
-  text: "运维工程师 | AI工具探索者 | 内容创作者"
-  tagline: 记录技术成长，分享AI提效经验，探索内容创作之路
+  text: "运维工程师 × AI 实践派"
+  tagline: 做了多年运维，K8s、Prometheus 是老本行；这两年把越来越多的时间花在 AI 上——记录技术成长，分享 AI 提效经验，探索一个人就是一支队伍的创作之路。
+  image:
+    src: /robin-avatar.jpg
+    alt: Robin 卡通头像
   actions:
     - theme: brand
       text: 查看文章
@@ -29,3 +32,6 @@ features:
   - icon: 💰
     title: 投资理财
     details: 记录A股投资心得，分享价值投资理念，追求稳健增值
+---
+
+<PostsGrid :limit="6" />

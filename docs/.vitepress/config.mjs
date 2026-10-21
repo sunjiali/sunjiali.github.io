@@ -11,7 +11,7 @@ export default defineConfig({
   ],
 
   themeConfig: {
-    logo: '/favicon.svg',
+    logo: '/robin-avatar.jpg',
 
     nav: [
       { text: '首页', link: '/' },
@@ -33,8 +33,8 @@ export default defineConfig({
     ],
 
     footer: {
-      message: '基于 VitePress 构建',
-      copyright: 'Copyright © 2024 Robin'
+      message: 'Built with VitePress & AI',
+      copyright: 'Copyright © 2026 Robin'
     },
 
     search: {

@@ -1,0 +1,237 @@
+/* ============================================================
+   Robin's blog — Neo-Brutalism × Matcha visual system
+   Palette (from Morry visual-system reference):
+     WARM  #F5F1E8  page background
+     INK   #16171A  borders, headings, hard shadows
+     MATCHA #A6CF5F primary green
+     ACID  #D9F24F  accent highlights
+   Layout grammar (iampeterwu.com reference): floating capsule nav,
+   thick ink borders + hard offset shadows, tilted sticker titles,
+   big bold hero with avatar card, 3-col article cards.
+   ============================================================ */
+
+:root {
+  --rb-warm: #f5f1e8;
+  --rb-paper: #fffef8;
+  --rb-ink: #16171a;
+  --rb-matcha: #a6cf5f;
+  --rb-matcha-deep: #5d8a1e;
+  --rb-acid: #d9f24f;
+  --rb-border: 2.5px solid var(--rb-ink);
+  --rb-shadow: 5px 5px 0 var(--rb-ink);
+  --rb-shadow-sm: 3px 3px 0 var(--rb-ink);
+  --rb-radius: 18px;
+
+  --vp-c-bg: var(--rb-warm);
+  --vp-c-bg-soft: var(--rb-paper);
+  --vp-c-bg-alt: #efe9db;
+  --vp-c-text-1: var(--rb-ink);
+  --vp-c-text-2: #4c4a44;
+  --vp-c-brand-1: var(--rb-matcha-deep);
+  --vp-c-brand-2: #4c7416;
+  --vp-c-brand-3: var(--rb-matcha);
+  --vp-c-brand-soft: rgba(166, 207, 95, 0.25);
+  --vp-font-family-base: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+::selection { background: var(--rb-acid); color: var(--rb-ink); }
+
+/* ---------- floating capsule nav ---------- */
+.VPNav { padding: 14px 24px 0; }
+.VPNavBar {
+  border: var(--rb-border);
+  border-radius: 999px;
+  background: var(--rb-paper);
+  box-shadow: var(--rb-shadow-sm);
+  padding: 0 10px;
+}
+.VPNavBar .container { max-width: 1152px; }
+.VPNavBarTitle .title { font-weight: 900; letter-spacing: 0.02em; }
+.VPNavBarTitle img.logo {
+  border-radius: 50%;
+  border: 2px solid var(--rb-ink);
+  width: 30px; height: 30px; object-fit: cover;
+}
+.VPNavBarMenuLink { font-weight: 700; }
+.VPNavBarMenuLink.active { color: var(--rb-matcha-deep); }
+.VPNavBarHamburger { border-radius: 999px; }
+
+/* ---------- hero ---------- */
+.VPHero { padding-top: 64px !important; }
+.VPHero .name {
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  background: none;
+  -webkit-text-fill-color: var(--rb-ink);
+  color: var(--rb-ink);
+}
+.VPHero .name.clip {
+  background: var(--rb-matcha);
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: var(--rb-ink);
+  color: var(--rb-ink);
+  border: var(--rb-border);
+  border-radius: 14px;
+  box-shadow: var(--rb-shadow-sm);
+  padding: 0 16px;
+}
+.VPHero .text { font-weight: 800; color: var(--rb-ink); }
+.VPHero .tagline { color: var(--rb-text-2, #4c4a44); font-weight: 500; }
+.VPHero .image { margin-top: 26px; }
+.VPHero .image-container {
+  border: var(--rb-border);
+  border-radius: 24px;
+  background: var(--rb-acid);
+  box-shadow: 8px 8px 0 var(--rb-ink);
+  transform: rotate(2deg);
+  overflow: hidden;
+  padding: 18px;
+}
+.VPHero .image-bg { display: none; }
+.VPHero img.image-src {
+  border-radius: 16px;
+  border: var(--rb-border);
+  background: var(--rb-paper);
+}
+
+/* ---------- buttons ---------- */
+.VPButton {
+  border: var(--rb-border) !important;
+  border-radius: 999px !important;
+  font-weight: 800;
+  box-shadow: var(--rb-shadow-sm);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.VPButton:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--rb-ink); }
+.VPButton:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--rb-ink); }
+.VPButton.brand { background: var(--rb-ink) !important; color: #fff !important; }
+.VPButton.alt { background: var(--rb-paper) !important; color: var(--rb-ink) !important; }
+
+/* ---------- feature cards ---------- */
+.VPFeatures .items { gap: 22px; }
+.VPFeature {
+  border: var(--rb-border) !important;
+  border-radius: var(--rb-radius) !important;
+  background: var(--rb-paper) !important;
+  box-shadow: var(--rb-shadow);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.VPFeature:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--rb-ink); }
+.VPFeature .icon {
+  background: var(--rb-matcha);
+  border: var(--rb-border);
+  border-radius: 12px;
+  box-shadow: var(--rb-shadow-sm);
+  font-size: 22px;
+  width: 46px; height: 46px;
+}
+.VPFeature .title { font-weight: 900; }
+.VPFeature .details { color: var(--rb-text-2, #4c4a44); }
+
+/* ---------- home section titles (sticker boxes) ---------- */
+.rb-section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1152px; margin: 56px auto 22px; padding: 0 24px;
+}
+.rb-sticker {
+  display: inline-block;
+  background: var(--rb-paper);
+  border: var(--rb-border);
+  border-radius: 12px;
+  box-shadow: var(--rb-shadow-sm);
+  padding: 6px 18px;
+  font-size: clamp(22px, 3.4vw, 32px);
+  font-weight: 900;
+  transform: rotate(-1.6deg);
+}
+.rb-sticker em {
+  font-style: normal;
+  background: var(--rb-matcha);
+  border-radius: 6px;
+  padding: 0 8px;
+}
+.rb-more { font-weight: 800; color: var(--rb-ink); text-decoration: none; white-space: nowrap; }
+.rb-more:hover { color: var(--rb-matcha-deep); text-decoration: underline; }
+
+/* ---------- article cards ---------- */
+.rb-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px; max-width: 1152px; margin: 0 auto; padding: 0 24px 10px;
+}
+.rb-card {
+  display: flex; flex-direction: column;
+  background: var(--rb-paper);
+  border: var(--rb-border); border-radius: var(--rb-radius);
+  box-shadow: var(--rb-shadow);
+  padding: 20px; text-decoration: none; color: var(--rb-ink);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.rb-card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--rb-ink); }
+.rb-card .cover {
+  border: var(--rb-border); border-radius: 12px;
+  background: var(--rb-matcha);
+  font-size: 44px; text-align: center; padding: 20px 0; margin-bottom: 14px;
+  position: relative;
+}
+.rb-card .cat {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--rb-acid); border: 2px solid var(--rb-ink); border-radius: 6px;
+  font-size: 11.5px; font-weight: 800; padding: 2px 8px; letter-spacing: 0.04em;
+}
+.rb-card .date { font-size: 13px; color: var(--rb-text-2, #4c4a44); margin-bottom: 4px; }
+.rb-card h3 { font-size: 19px; font-weight: 900; line-height: 1.35; margin-bottom: 8px; }
+.rb-card p { font-size: 14.5px; color: var(--rb-text-2, #4c4a44); flex: 1; }
+.rb-card .go { margin-top: 12px; font-weight: 800; font-size: 14px; }
+/* cards live inside .vp-doc on the home/posts pages — neutralize doc link styles */
+.vp-doc a.rb-card { color: var(--rb-ink); text-decoration: none; font-weight: inherit; }
+.vp-doc a.rb-card h3 { color: var(--rb-ink); }
+.vp-doc a.rb-card p { color: var(--rb-text-2, #4c4a44); }
+.vp-doc a.rb-more { color: var(--rb-ink); text-decoration: none; }
+.vp-doc a.rb-more:hover { color: var(--rb-matcha-deep); text-decoration: underline; }
+
+/* ---------- article body ---------- */
+.vp-doc h1 {
+  font-weight: 900;
+  background: linear-gradient(transparent 68%, var(--rb-matcha) 68%, var(--rb-matcha) 96%, transparent 96%);
+  display: inline; padding: 0 4px;
+}
+.vp-doc h2 { border-top: none; font-weight: 900; }
+.vp-doc h2::before {
+  content: ""; display: inline-block; width: 12px; height: 12px;
+  background: var(--rb-acid); border: 2px solid var(--rb-ink); border-radius: 3px;
+  margin-right: 10px; transform: rotate(-4deg);
+}
+.vp-doc a { color: var(--rb-matcha-deep); font-weight: 600; }
+.vp-doc blockquote {
+  border-left: 4px solid var(--rb-ink);
+  background: rgba(166, 207, 95, 0.18);
+  border-radius: 0 12px 12px 0;
+  padding: 10px 16px;
+}
+.vp-doc img { border-radius: 14px; }
+.vp-doc div[class*="language-"] {
+  border: var(--rb-border); border-radius: 14px; box-shadow: var(--rb-shadow-sm);
+}
+.vp-doc table { border: var(--rb-border); border-radius: 10px; overflow: hidden; }
+
+/* ---------- sidebar / footer ---------- */
+.VPSidebarItem.level-0 > .item .text { font-weight: 900; }
+.VPFooter { border-top: 3px solid var(--rb-ink); background: var(--rb-paper); }
+.VPFooter .message { font-weight: 700; }
+
+/* doc pages: keep content column airy like the reference */
+.VPDoc .container { max-width: 1180px; }
+
+/* ---------- dark mode: keep the system readable ---------- */
+.dark {
+  --vp-c-bg: #1b1c1e;
+  --vp-c-bg-soft: #232427;
+  --vp-c-bg-alt: #26272b;
+  --vp-c-text-1: #f2efe6;
+  --vp-c-text-2: #b9b4a6;
+}
+.dark .VPNavBar, .dark .VPFeature, .dark .rb-card { background: #232427; }
+.dark .rb-card, .dark .rb-card h3 { color: #f2efe6; }
+.dark .VPHero .name, .dark .VPHero .text { color: #f2efe6; -webkit-text-fill-color: #f2efe6; }
