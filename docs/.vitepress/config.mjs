@@ -25,6 +25,7 @@ export default defineConfig({
         text: '博客文章',
         items: [
           { text: '开篇：一个运维工程师的 AI 笔记', link: '/posts/ai-ip-opening' },
+          { text: '把 YouTube 当大学：四阶段 AI 自学路线图', link: '/posts/youtube-university' },
         ]
       }
     ],
