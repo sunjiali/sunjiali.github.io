@@ -78,7 +78,7 @@
   padding: 0 16px;
 }
 .VPHero .text { font-weight: 800; color: var(--rb-ink); }
-.VPHero .tagline { color: var(--rb-text-2, #4c4a44); font-weight: 500; }
+.VPHero .tagline { color: var(--vp-c-text-2); font-weight: 500; }
 .VPHero .image { margin-top: 26px; }
 .VPHero .image-container {
   border: var(--rb-border);
@@ -128,7 +128,7 @@
   width: 46px; height: 46px;
 }
 .VPFeature .title { font-weight: 900; }
-.VPFeature .details { color: var(--rb-text-2, #4c4a44); }
+.VPFeature .details { color: var(--vp-c-text-2); }
 
 /* ---------- home section titles (sticker boxes) ---------- */
 .rb-section-head {
@@ -180,14 +180,14 @@
   background: var(--rb-acid); border: 2px solid var(--rb-ink); border-radius: 6px;
   font-size: 11.5px; font-weight: 800; padding: 2px 8px; letter-spacing: 0.04em;
 }
-.rb-card .date { font-size: 13px; color: var(--rb-text-2, #4c4a44); margin-bottom: 4px; }
+.rb-card .date { font-size: 13px; color: var(--vp-c-text-2); margin-bottom: 4px; }
 .rb-card h3 { font-size: 19px; font-weight: 900; line-height: 1.35; margin-bottom: 8px; }
-.rb-card p { font-size: 14.5px; color: var(--rb-text-2, #4c4a44); flex: 1; }
+.rb-card p { font-size: 14.5px; color: var(--vp-c-text-2); flex: 1; }
 .rb-card .go { margin-top: 12px; font-weight: 800; font-size: 14px; }
 /* cards live inside .vp-doc on the home/posts pages — neutralize doc link styles */
 .vp-doc a.rb-card { color: var(--rb-ink); text-decoration: none; font-weight: inherit; }
 .vp-doc a.rb-card h3 { color: var(--rb-ink); }
-.vp-doc a.rb-card p { color: var(--rb-text-2, #4c4a44); }
+.vp-doc a.rb-card p { color: var(--vp-c-text-2); }
 .vp-doc a.rb-more { color: var(--rb-ink); text-decoration: none; }
 .vp-doc a.rb-more:hover { color: var(--rb-matcha-deep); text-decoration: underline; }
 
@@ -224,14 +224,44 @@
 /* doc pages: keep content column airy like the reference */
 .VPDoc .container { max-width: 1180px; }
 
-/* ---------- dark mode: keep the system readable ---------- */
+/* ---------- dark mode: warm charcoal flip of the same system ----------
+   Light mode is cream paper + ink lines. Dark mode keeps the grammar:
+   warm-charcoal paper, cream lines instead of ink, hard shadows go pure
+   black, matcha lifts one step for contrast, and text sitting ON matcha /
+   acid fills stays ink-dark (it is printed on a light fill, not the bg). */
 .dark {
-  --vp-c-bg: #1b1c1e;
-  --vp-c-bg-soft: #232427;
-  --vp-c-bg-alt: #26272b;
+  --rb-warm: #1c1b17;
+  --rb-paper: #29271f;
+  --rb-ink: #efe9da;
+  --rb-matcha: #a6cf5f;
+  --rb-matcha-deep: #b9e076;
+  --rb-acid: #d9f24f;
+  --rb-shadow: 5px 5px 0 #000;
+  --rb-shadow-sm: 3px 3px 0 #000;
+
+  --vp-c-bg: var(--rb-warm);
+  --vp-c-bg-soft: var(--rb-paper);
+  --vp-c-bg-alt: #23211b;
   --vp-c-text-1: #f2efe6;
   --vp-c-text-2: #b9b4a6;
+  --vp-c-brand-1: var(--rb-matcha-deep);
+  --vp-c-brand-2: var(--rb-matcha);
+  --vp-c-brand-3: var(--rb-matcha);
+  --vp-c-brand-soft: rgba(166, 207, 95, 0.18);
+  --vp-c-divider: #3a372c;
+  --vp-c-gutter: #14130f;
 }
-.dark .VPNavBar, .dark .VPFeature, .dark .rb-card { background: #232427; }
-.dark .rb-card, .dark .rb-card h3 { color: #f2efe6; }
-.dark .VPHero .name, .dark .VPHero .text { color: #f2efe6; -webkit-text-fill-color: #f2efe6; }
+/* fills stay matcha/acid in dark mode, so the ink-dark text printed on
+   them must not follow --rb-ink when it flips to cream */
+.dark ::selection { color: #16171a; }
+.dark .VPHero .name.clip { color: #16171a; -webkit-text-fill-color: #16171a; }
+.dark .rb-sticker em { color: #16171a; }
+.dark .rb-card .cat { color: #16171a; }
+.dark .VPButton.brand { background: var(--rb-matcha) !important; color: #16171a !important; }
+.dark .VPButton.brand:hover { box-shadow: 4px 4px 0 #000; }
+.dark .VPButton:active { box-shadow: 1px 1px 0 #000; }
+.dark .VPHero .image-container { box-shadow: 8px 8px 0 #000; }
+.dark .VPButton:hover, .dark .VPFeature:hover, .dark .rb-card:hover { box-shadow: 7px 7px 0 #000; }
+.dark .VPButton:hover { box-shadow: 4px 4px 0 #000; }
+.dark .vp-doc blockquote { background: rgba(166, 207, 95, 0.12); }
+.dark .vp-doc h1 { background: linear-gradient(transparent 68%, rgba(166, 207, 95, 0.55) 68%, rgba(166, 207, 95, 0.55) 96%, transparent 96%); }
