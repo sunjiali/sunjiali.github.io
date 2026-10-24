@@ -22,7 +22,7 @@ hero:
 features:
   - icon: ⚙️
     title: 运维专家
-    details: 多年运维经验，熟悉K8s、Prometheus等开源技术，致力于自动化运维实践
+    details: 多年数据中心运维经验，熟悉服务器硬件运维与网络设备，致力于自动化运维实践
   - icon: 🤖
     title: AI提效
     details: 探索AI工具在工作和创作中的应用，用技术提升效率，用工具解放生产力
