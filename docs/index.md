@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "Robin"
   text: "运维工程师 × AI 实践派"
-  tagline: 做了多年运维，K8s、Prometheus 是老本行；这两年把越来越多的时间花在 AI 上——记录技术成长，分享 AI 提效经验，探索一个人就是一支队伍的创作之路。
+  tagline: 做了多年数据中心运维，天天和服务器、网络设备打交道；这两年把越来越多的时间花在 AI 上——记录技术成长，分享 AI 提效经验，探索一个人就是一支队伍的创作之路。
   image:
     src: /robin-avatar.jpg
     alt: Robin 卡通头像
